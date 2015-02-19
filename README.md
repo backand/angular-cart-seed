@@ -1,4 +1,4 @@
-# [angular-kickstart](http://vesparny.github.io/angular-kickstart/)
+# [backand-angular-kickstart](http://vesparny.github.io/angular-kickstart/)
 
 [![Build Status](https://secure.travis-ci.org/vesparny/angular-kickstart.svg)](http://travis-ci.org/vesparny/angular-kickstart)
 
