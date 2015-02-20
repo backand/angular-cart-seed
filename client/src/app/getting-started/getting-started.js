@@ -12,7 +12,7 @@
         views: {
           '@': {
             templateUrl: 'src/app/getting-started/getting-started.tpl.html',
-            controller: 'GettingStartedCtrl as docs'
+            controller: 'GettingStartedCtrl as start'
           }
         }
       });
@@ -22,14 +22,64 @@
    * @name  gettingStartedCtrl
    * @description Controller
    */
-  function GettingStartedCtrl($log) {
-    var docs = this;
-    docs.someMethos = function () {
-      $log.debug('I\'m a method');
+  function GettingStartedCtrl($log, Backand, $cookieStore, DataService) {
+
+    var start = this;
+
+    (function init() {
+      start.username = "";
+      start.password = "";
+      start.appName = "";
+      start.tables = null;
+      start.isLoggedIn = false;
+      start.tableData = "{}";
+      start.results = "Not connected to Backand yet";
+      loadTables();
+    }());
+
+
+    start.signin = function () {
+      Backand.signin(start.username, start.password, start.appName)
+        .then(
+        function (token) {
+          $cookieStore.put(Backand.configuration.tokenName, token);
+          start.results = "you are in";
+          loadTables();
+        },
+        function (data, status, headers, config) {
+          $log.debug("authentication error", data, status, headers, config);
+          start.results = data;
+        }
+      );
     };
+
+    start.signout = function (){
+      Backand.signout();
+    }
+
+    function loadTables() {
+      DataService.allTables().then(loadTablesSuccess, errorHandler);
+    }
+
+    function loadTablesSuccess(tables) {
+      start.tables = tables.data.data;
+      start.results = "Tables loaded";
+      start.isLoggedIn = true;
+    }
+
+    start.loadTableData = function(){
+      DataService.tableData(start.tableSelected).then(loadTablesDataSuccess, errorHandler);
+    }
+    function loadTablesDataSuccess(tableData) {
+      start.tableData = tableData.data.data;
+    }
+
+    function errorHandler(error, message) {
+      $log.debug(message, error)
+    }
   }
 
   angular.module('getting-started', [])
     .config(config)
-    .controller('GettingStartedCtrl', GettingStartedCtrl);
+    .controller('GettingStartedCtrl', ['$log', 'Backand', '$cookieStore','DataService', GettingStartedCtrl]);
 })();
