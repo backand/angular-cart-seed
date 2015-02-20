@@ -34,6 +34,8 @@
 
   angular.module('app', [
       'ui.router',
+      'backand',
+      'ngCookies',
       'home',
       'getting-started',
       'common.header',
