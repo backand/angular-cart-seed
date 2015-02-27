@@ -13,11 +13,11 @@ Install **node.js**. Then **gulp** and **bower** if you haven't yet.
 
     $ npm -g install gulp bower
 
-After that, install angular-kickstart downloading the [latest release](https://github.com/backand/angular-kickstart/releases) (or clone the master branch if you want to run the development version). 
-    
+After that, install angular-kickstart downloading the [master release](https://github.com/backand/angular-kickstart/archive/master.zip) (or clone the master branch if you want to run the development version). 
     $ git clone https://github.com/backand/angular-kickstart.git
+    $ cd angular-kickstart
     
-Unzip the project and cd into it, then install bower and npm dependencies, and run the application in development mode.
+Install bower and npm dependencies, and run the application in development mode.
 
     $ npm install
     $ bower install
@@ -35,6 +35,7 @@ This task will lint your code, optimize css js and images files, run unit tests.
 
 ### Features
 
+* Backand SDK included, just sign in to your app and the entire back-end is ready.
 * 5 simple task: `gulp serve`,`gulp serve:dist`, `gulp serve:tdd`, `gulp test:unit`, `gulp test:e2e`
 * JavaScript file continuous linting with `jshint`.
 * SASS continuous compiling.
