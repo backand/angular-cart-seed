@@ -5,7 +5,7 @@
 
 ### What and Why
 
-angular-kickstart is an opinionated kickstart for single page application development with AngularJS. It makes your development and testing easy, keeps the structure of the project consistent and allows you to create a fully optimized production release with ease. After having developed a lot of AngularJS projects I decided to collect here what I've learnt.
+There is no doubt that AngularJS has earned its place as one of the most powerful JavaScript frameworks available. The ability to quickly and sanely create production grade web applications with AngularJS has opened up a whole new frontier of possibilities for developers around the world. With Backand, we can take this to an entirely new level by quickly and painlessly adding a powerful backend to your AngularJS application. Come join us as we take an existing RESTful application and convert it to use Backand's cloud-based services in minutes. We will also show how we can easily customize security, send emails or notifications, apply app rules and call other apps via HTTP. There has never been a better time to build better things faster!
 
 ### Getting started
 
