@@ -22,7 +22,7 @@
    * @name  gettingStartedCtrl
    * @description Controller
    */
-  function GettingStartedCtrl($log, Backand, $cookieStore, DataService) {
+  function GettingStartedCtrl($log, Backand, $cookieStore, BackandService) {
 
     var start = this;
 
@@ -58,7 +58,7 @@
     }
 
     function loadTables() {
-      DataService.allTables().then(loadTablesSuccess, errorHandler);
+      BackandService.allTables().then(loadTablesSuccess, errorHandler);
     }
 
     function loadTablesSuccess(tables) {
@@ -68,7 +68,7 @@
     }
 
     start.loadTableData = function(){
-      DataService.tableData(start.tableSelected).then(loadTablesDataSuccess, errorHandler);
+      BackandService.tableData(start.tableSelected).then(loadTablesDataSuccess, errorHandler);
     }
     function loadTablesDataSuccess(tableData) {
       start.tableData = tableData.data.data;
@@ -81,5 +81,5 @@
 
   angular.module('getting-started', [])
     .config(config)
-    .controller('GettingStartedCtrl', ['$log', 'Backand', '$cookieStore','DataService', GettingStartedCtrl]);
+    .controller('GettingStartedCtrl', ['$log', 'Backand', '$cookieStore','BackandService', GettingStartedCtrl]);
 })();
