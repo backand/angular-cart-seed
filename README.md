@@ -24,7 +24,7 @@ Install bower and npm dependencies, and run the application in development mode.
     $ bower install
     $ gulp serve
 
-You are now ready to go, your applcation is available at **http://127.0.0.1:3000**.
+You are now ready to go, your application is available at **http://127.0.0.1:3000**.
 
 **Every file you add, edit or delete into the `/client` folder will be handled by the build system**.
 
