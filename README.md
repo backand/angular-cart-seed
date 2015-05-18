@@ -9,9 +9,8 @@ There is no doubt that AngularJS has earned its place as one of the most powerfu
 
 ### Getting started
 
-Install **node.js**. Then **sass**, **gulp** and **bower** if you haven't yet.
+Install **node.js**. Then **gulp** and **bower** if you haven't yet.
 
-    $ gem install sass
     $ npm -g install gulp bower
 
 After that, install angular-kickstart downloading the [master release](https://github.com/backand/angular-kickstart/archive/master.zip) (or clone the master branch if you want to run the development version). 
