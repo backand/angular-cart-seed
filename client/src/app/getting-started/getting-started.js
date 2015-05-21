@@ -22,7 +22,7 @@
    * @name  gettingStartedCtrl
    * @description Controller
    */
-  function GettingStartedCtrl($log, Backand, $cookieStore, BackandService) {
+  function GettingStartedCtrl($log, $state, Backand, BackandService) {
 
     var start = this;
 
@@ -30,21 +30,20 @@
       start.username = "";
       start.password = "";
       start.appName = "";
-      start.tables = null;
+      start.objects = null;
       start.isLoggedIn = false;
-      start.tableData = "{}";
+      start.objectData = "{}";
       start.results = "Not connected to Backand yet";
-      loadTables();
+      loadObjects();
     }());
 
 
     start.signin = function () {
       Backand.signin(start.username, start.password, start.appName)
         .then(
-        function (token) {
-          $cookieStore.put(Backand.configuration.tokenName, token);
+        function () {
           start.results = "you are in";
-          loadTables();
+          loadObjects();
         },
         function (data, status, headers, config) {
           $log.debug("authentication error", data, status, headers, config);
@@ -55,23 +54,24 @@
 
     start.signout = function (){
       Backand.signout();
+      $state.go('root.getting-started',{}, {reload: true});
     }
 
-    function loadTables() {
-      BackandService.allTables().then(loadTablesSuccess, errorHandler);
+    function loadObjects() {
+      BackandService.listOfObjects().then(loadObjectsSuccess, errorHandler);
     }
 
-    function loadTablesSuccess(tables) {
-      start.tables = tables.data.data;
-      start.results = "Tables loaded";
+    function loadObjectsSuccess(list) {
+      start.objects = list.data.data;
+      start.results = "Objects loaded";
       start.isLoggedIn = true;
     }
 
-    start.loadTableData = function(){
-      BackandService.tableData(start.tableSelected).then(loadTablesDataSuccess, errorHandler);
+    start.loadObjectData = function(){
+      BackandService.objectData(start.objectSelected).then(loadObjectDataSuccess, errorHandler);
     }
-    function loadTablesDataSuccess(tableData) {
-      start.tableData = tableData.data.data;
+    function loadObjectDataSuccess(ObjectData) {
+      start.objectData = ObjectData.data.data;
     }
 
     function errorHandler(error, message) {
@@ -81,5 +81,5 @@
 
   angular.module('getting-started', [])
     .config(config)
-    .controller('GettingStartedCtrl', ['$log', 'Backand', '$cookieStore','BackandService', GettingStartedCtrl]);
+    .controller('GettingStartedCtrl', ['$log', '$state', 'Backand','BackandService', GettingStartedCtrl]);
 })();

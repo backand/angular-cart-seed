@@ -1,14 +1,14 @@
-(function () {
-    'use strict';
+(function() {
+  'use strict';
 
-    function dataService() {
-        return {
-            get: function () {
-                return ['some', 'data'];
-            }
-        };
-    }
+  function dataService() {
+    return {
+      get: function() {
+        return ['some', 'data'];
+      }
+    };
+  }
 
-    angular.module('common.services.data', [])
-      .factory('DataService', dataService);
+  angular.module('common.services.data', [])
+    .factory('DataService', dataService);
 })();

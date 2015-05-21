@@ -1,13 +1,14 @@
-(function() {
+(function () {
   'use strict';
 
   function backandService($http, Backand) {
-    var self = this;
 
-    self.allTables = function() {
+    var factory = {};
+
+    factory.listOfObjects = function() {
       return $http({
         method: 'GET',
-        url: Backand.configuration.apiUrl + '/1/table/config',
+        url: Backand.getApiUrl() + '/1/table/config',
         params: {
           pageSize: 200,
           pageNumber: 1,
@@ -17,10 +18,10 @@
       });
     }
 
-    self.tableData = function(tableName, pageSize, pageNumber, sort, filter) {
+    factory.objectData = function(name, pageSize, pageNumber, sort, filter) {
       return $http({
         method: 'GET',
-        url: Backand.configuration.apiUrl + '/1/table/data/' + tableName,
+        url: Backand.getApiUrl() + '/1/objects/' + name,
         params: {
           pageSize: pageSize || 5,
           pageNumber: pageNumber || 1,
@@ -29,8 +30,11 @@
         }
       });
     }
+
+    return factory;
+
   }
 
-  angular.module('common.services.data', [])
-    .service('BackandService',['$http','Backand', backandService]);
+  angular.module('common.services.backand',[])
+    .factory('BackandService', ['$http','Backand', backandService]);
 })();
