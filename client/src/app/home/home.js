@@ -12,7 +12,12 @@
         views: {
           '@': {
             templateUrl: 'src/app/home/home.tpl.html',
-            controller: 'HomeCtrl as home'
+            controller: 'HomeCtrl as home',
+            resolve: {
+              data: function(DataService) {
+                return DataService.get();
+              }
+            }
           }
         }
       });
@@ -29,5 +34,5 @@
 
   angular.module('home', [])
     .config(config)
-    .controller('HomeCtrl', HomeCtrl);
+    .controller('HomeCtrl',HomeCtrl);
 })();

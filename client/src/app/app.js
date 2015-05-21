@@ -5,9 +5,12 @@
     angular.bootstrap(document, ['app']);
   });
 
-  function config($stateProvider, $urlRouterProvider, $logProvider, $httpProvider) {
+  function config(BackandProvider, $stateProvider, $urlRouterProvider, $logProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/');
     $logProvider.debugEnabled(true);
+    BackandProvider.manageDefaultHeaders();
+    //BackandProvider.setAnonymousToken('Your Anonymous Token');
+    //BackandProvider.setSignUpToken('Your SignUp Token');
     $httpProvider.interceptors.push('httpInterceptor');
     $stateProvider
       .state('root', {
@@ -25,7 +28,7 @@
   }
 
   function MainCtrl($log) {
-    $log.debug('MainCtrl laoded!');
+    $log.debug('MainCtrl loaded!');
   }
 
   function run($log) {
@@ -40,6 +43,7 @@
       'getting-started',
       'common.header',
       'common.footer',
+      'common.services.backand',
       'common.services.data',
       'common.directives.version',
       'common.filters.uppercase',

@@ -1,12 +1,9 @@
 (function() {
   'use strict';
 
-  function httpInterceptor($q, $log, $cookieStore) {
+  function httpInterceptor($q, $log) {
     return {
-      request: function(config) {
-        config.headers['Authorization'] = $cookieStore.get('backand_token');
-        return config;
-      },
+
       requestError: function(rejection) {
         $log.debug(rejection);
         return $q.reject(rejection);

@@ -27,17 +27,17 @@
     <label>Status: {{start.results}}</label>
     <hr/>
 
-    <h3 ng-if="!start.isLoggedIn">List of Tables - Example of using configuration API (Must Sign In first)</h3>
-    <h3 ng-if="start.isLoggedIn">List of Tables - Example of using configuration API</h3>
+    <h3 ng-if="!start.isLoggedIn">List of Objects - Example of using configuration API (Must sign in first)</h3>
+    <h3 ng-if="start.isLoggedIn">List of Objects - Example of using configuration API</h3>
     <select class="form-control"
-            ng-options="table.name as table.name for table in start.tables"
-            ng-model="start.tableSelected"
+            ng-options="object.name as object.name for object in start.objects"
+            ng-model="start.objectSelected"
             ng-model-options="{debounce:{default:100}}"
-            ng-change="start.loadTableData()">
-      <option value="">Select a table</option>
+            ng-change="start.loadObjectData()">
+      <option value="">Select an object</option>
     </select>
     <hr/>
-    <h3>Table Grid - Example of using data API</h3>
-    <pre>{{start.tableData | json}}</pre>
+    <h3>Object - Example of using data API</h3>
+    <pre>{{start.objectData | json}}</pre>
   </div>
 </div>
