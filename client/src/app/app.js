@@ -8,9 +8,11 @@
   function config(BackandProvider, $stateProvider, $urlRouterProvider, $logProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/');
     $logProvider.debugEnabled(true);
+
     BackandProvider.manageDefaultHeaders();
     //BackandProvider.setAnonymousToken('Your Anonymous Token');
     //BackandProvider.setSignUpToken('Your SignUp Token');
+
     $httpProvider.interceptors.push('httpInterceptor');
     $stateProvider
       .state('root', {
