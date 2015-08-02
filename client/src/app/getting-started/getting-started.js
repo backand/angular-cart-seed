@@ -39,7 +39,10 @@
 
 
     start.signin = function () {
-      Backand.signin(start.username, start.password, start.appName)
+
+      Backand.setAppName(start.appName);
+
+      Backand.signin(start.username, start.password)
         .then(
         function () {
           start.results = "you are in";
