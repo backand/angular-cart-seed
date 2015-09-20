@@ -9,7 +9,6 @@
     $urlRouterProvider.otherwise('/');
     $logProvider.debugEnabled(true);
 
-    BackandProvider.manageDefaultHeaders();
     //BackandProvider.setAnonymousToken('Your Anonymous Token');
     //BackandProvider.setSignUpToken('Your SignUp Token');
 
@@ -40,7 +39,6 @@
   angular.module('app', [
       'ui.router',
       'backand',
-      'ngCookies',
       'home',
       'getting-started',
       'common.header',
