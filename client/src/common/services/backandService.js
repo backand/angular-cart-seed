@@ -16,7 +16,7 @@
           sort: '[{fieldName:"captionText", order:"asc"}]'
         }
       });
-    }
+    };
 
     factory.objectData = function(name, pageSize, pageNumber, sort, filter) {
       return $http({
@@ -29,7 +29,7 @@
           sort: sort || ''
         }
       });
-    }
+    };
 
     return factory;
 
