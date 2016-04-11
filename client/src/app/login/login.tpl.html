@@ -1,0 +1,148 @@
+﻿<div class="view container">
+    <div class="col-md-5" style="padding-right:50px; border-right: 1px solid #ccc;">
+        <header>
+            <h3><span class="glyphicon glyphicon-lock"></span> Login</h3>
+        </header>
+        <form name="loginForm" novalidate>
+            <div class="login">
+                <div class="row">
+                    <div class="col-md-2">
+                        Email:
+                    </div>
+                    <div class="col-md-10">
+                        <input type="email" name="email" class="form-control" data-ng-model="vm.email" required />
+                        <span class="errorMessage" ng-show="loginForm.email.$touched && loginForm.email.$invalid">
+                            Email is required
+                        </span>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-2">
+                        Password:
+                    </div>
+                    <div class="col-md-10">
+                        <input type="password" name="password" class="form-control"
+                               data-ng-model="vm.password"
+                               data-ng-minlength="6"
+                               required />
+                        <span class="errorMessage" ng-show="loginForm.password.$touched && loginForm.password.$invalid">
+                            Password is required
+                        </span>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <button type="submit" class="btn btn-primary"
+                                data-ng-click="vm.login()"
+                                ng-disabled="loginForm.$invalid || !loginForm.$dirty">
+                            Login
+                        </button>
+                    </div>
+                </div>
+                <div class="statusRow">
+                    <br />
+                    <div class="text-danger" ng-if="vm.errorMessage">
+                        <span class="glyphicon glyphicon-thumbs-down"></span>&nbsp;&nbsp;Error: {{ vm.errorMessage }}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-5" style="padding-left:50px;">
+        <header>
+            <h3><span class="glyphicon glyphicon-lock"></span> Sign up</h3>
+        </header>
+        <form name="signupForm" novalidate>
+            <div class="login">
+              <div class="row">
+                <div class="col-md-3">
+                  First Name:
+                </div>
+                <div class="col-md-9">
+                  <input type="text" name="firstName" class="form-control" data-ng-model="vm.firstName" required />
+                        <span class="errorMessage" ng-show="signupForm.firstName.$touched && signupForm.firstName.$invalid">
+                            First Name is required
+                        </span>
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-md-3">
+                  Last Name:
+                </div>
+                <div class="col-md-9">
+                  <input type="text" name="lastName" class="form-control" data-ng-model="vm.lastName" required />
+                        <span class="errorMessage" ng-show="signupForm.lastName.$touched && signupForm.lastName.$invalid">
+                            Last Name is required
+                        </span>
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                  <div class="col-md-3">
+                      Email:
+                  </div>
+                  <div class="col-md-9">
+                      <input type="email" name="signEmail" class="form-control" data-ng-model="vm.signEmail" required />
+                      <span class="errorMessage" ng-show="signupForm.signEmail.$touched && signupForm.signEmail.$invalid">
+                          Email is required
+                      </span>
+                  </div>
+              </div>
+              <br />
+              <div class="row">
+                  <div class="col-md-3">
+                      Password:
+                  </div>
+                  <div class="col-md-9">
+                      <input type="password" name="signPassword" class="form-control"
+                             data-ng-model="vm.signPassword"
+                             data-ng-minlength="6"
+                             required />
+                      <span class="errorMessage" ng-show="signupForm.signPassword.$touched && signupForm.signPassword.$invalid">
+                          Password is required
+                      </span>
+                  </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-md-3">
+                  Phone #:
+                </div>
+                <div class="col-md-9">
+                  <input type="text" name="phoneNumber" class="form-control" data-ng-model="vm.phoneNumber" />
+                </div>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-9">
+                  <div class="g-recaptcha" data-sitekey="6Ld3CR0TAAAAAGhsxsaZErR7GeHq2OTzf1CGx085"></div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-12">
+                      <button type="submit" class="btn btn-primary"
+                              data-ng-click="vm.signup(signupForm)"
+                              ng-disabled="signupForm.$invalid || !signupForm.$dirty">
+                          Sign up
+                      </button>
+                  </div>
+              </div>
+              <div class="statusRow">
+                  <br />
+                  <div class="text-danger" ng-if="vm.errorSignupMessage">
+                      <span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error: {{ vm.errorSignupMessage }}
+                  </div>
+              </div>
+            </div>
+            <br/>
+          <br/>
+        </form>
+    </div>
+</div>
+

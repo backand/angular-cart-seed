@@ -1,0 +1,59 @@
+<div>
+  <h3>Demo Store <span>(ngcart-addtocart)</span></h3>
+  <p >Add items to your cart using the ng-addtocart directives below <br/>
+    View your cart from the ngcart-summary directive in the top right or click 'Cart'</p>
+  <div class="row">
+    <div class="col-xs-3" ng-repeat="item in vm.products" >
+      <div class="thumbnail">
+        <img ng-src="{{ item.imageUrl }}"></h3>
+        <h4>{{ item.name }}</h4>
+        <p>{{ item.description }}</p>
+        <div class="bottom-box">
+          <h3 class="price">{{ item.price | currency}}</h3>
+          <ngcart-addtocart id="{{ item.id }}"
+                          name="{{ item.name }}"
+                          price="{{ item.price  }}"
+                          data="item"
+                          quantity="1"
+                          quantity-max="{{ item.maxQuantity }}">
+          Add To Cart
+          </ngcart-addtocart>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+  <h3>Cart <span> (ngcart-cart)</span></h3>
+
+  <div class="row">
+    <ngcart-cart></ngcart-cart>
+  </div>
+
+<hr/>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <h3>Checkout <span> (ngcart-checkout)</span></h3>
+
+
+      <div class="row">
+        <div class="col-xs-4">
+          <h4>service 'backand + stripe'</h4>
+          <button class="btn btn-primary" ng-click="vm.checkout()" ng-disabled="!vm.getTotalItems()">Checkout
+          on Server</button>
+
+        </div>
+        <div class="col-xs-4">
+          <h4>service 'paypal'</h4>
+          <ngcart-checkout service="paypal" settings="payPalSettings"></ngcart-checkout>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+

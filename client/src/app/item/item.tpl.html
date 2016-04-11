@@ -1,0 +1,93 @@
+﻿<div class="view container">
+  <div>
+    <header>
+      <h3><span class="glyphicon glyphicon-item"></span> Add new Item</h3>
+    </header>
+    <div us-spinner spinner-key="upload-loading"></div>
+    <form name="itemForm" novalidate>
+      <div class="">
+        <div class="row">
+          <div class="col-md-2">
+            Name:
+          </div>
+          <div class="col-md-10">
+            <input type="text" name="name" class="form-control" data-ng-model="vm.item.name" required/>
+              <span class="errorMessage" ng-show="itemForm.name.$touched && itemForm.name.$invalid">
+                  Name is required
+              </span>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-2">
+            Description:
+          </div>
+          <div class="col-md-10">
+            <input type="text" name="description" class="form-control" data-ng-model="vm.item.description" required/>
+              <span class="errorMessage" ng-show="itemForm.description.$touched && itemForm.description.$invalid">
+                  Description is required
+              </span>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-2">
+            Price:
+          </div>
+          <div class="col-md-10">
+            <input type="number" name="price" class="form-control" data-ng-model="vm.item.price" required/>
+              <span class="errorMessage" ng-show="itemForm.price.$touched && itemForm.price.$invalid">
+                  Price is required
+              </span>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-2">
+            Max Quantity:
+          </div>
+          <div class="col-md-10">
+            <input type="number" name="maxQuantity" class="form-control" data-ng-model="vm.item.maxQuantity" required/>
+              <span class="errorMessage" ng-show="itemForm.maxQuantity.$touched && itemForm.maxQuantity.$invalid">
+                  Max Quantity is required
+              </span>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-2">
+            Upload Files:
+          </div>
+          <div class="col-md-10">
+            <div ngf-drop ng-model="vm.file" class="drop-box" ngf-pattern="'image/*'"
+                 ngf-accept="'image/*'" ngf-max-size="20MB"
+                 ngf-drag-over-class="'dragover'" ngf-multiple="false"
+                 ngf-select="vm.upload($file)">
+              Drop item image here or click to upload
+            </div>
+            <div>
+              <img src="{{vm.item.imageUrl}}" style="height: 150px;" ng-if="vm.item.imageUrl">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 ">
+            <button type="submit" class="btn btn-primary"
+                    data-ng-click="vm.addItem()"
+                    ng-disabled="itemForm.$invalid || !itemForm.$dirty">
+              Add Item
+            </button>
+          </div>
+        </div>
+        <br/>
+        <div class="statusRow">
+          <br/>
+          <div class="label label-important" data-ng-show="vm.errorMessage">
+            <span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error: {{ vm.errorMessage }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

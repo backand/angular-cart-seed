@@ -5,28 +5,83 @@
 
     var factory = {};
 
-    factory.listOfObjects = function() {
+    factory.listOfActiveItems = function(pageSize, pageNumber) {
       return $http({
         method: 'GET',
-        url: Backand.getApiUrl() + '/1/table/config',
+        url: Backand.getApiUrl() + '/1/objects/items',
         params: {
-          pageSize: 200,
-          pageNumber: 1,
-          filter: '[{fieldName:"SystemView", operator:"equals", value: false}]',
-          sort: '[{fieldName:"captionText", order:"asc"}]'
+          pageSize: pageSize || 30,
+          pageNumber: pageNumber || 1,
+          filter: [
+            {
+              fieldName: 'inStock',
+              operator: 'equals',
+              value: true
+            }
+          ],
+          sort: [
+            {
+              fieldName: "price",
+              order: "desc"
+            }
+          ]
         }
       });
     };
 
-    factory.objectData = function(name, pageSize, pageNumber, sort, filter) {
+    factory.createCart = function(cart, token) {
+      return $http({
+        method: 'POST',
+        url: Backand.getApiUrl() + '/1/objects/cart?deep=true&returnObject=true',
+        data: cart,
+        params:{
+          parameters:{
+            token: token
+          }
+        }
+      });
+    };
+
+    factory.addItem = function(item) {
+      return $http({
+        method: 'POST',
+        url: Backand.getApiUrl() + '/1/objects/items?returnObject=true',
+        data: item
+      });
+    };
+
+    //Call makePayment on demand action
+    factory.makePayment = function(amount, token){
       return $http({
         method: 'GET',
-        url: Backand.getApiUrl() + '/1/objects/' + name,
-        params: {
-          pageSize: pageSize || 5,
-          pageNumber: pageNumber || 1,
-          filter: filter || '',
-          sort: sort || ''
+        url: Backand.getApiUrl() + '/1/objects/action/cart',
+        params:{
+          name: 'StripePayment',
+          parameters:{
+            token: token,
+            amount: amount
+          }
+        }
+      });
+    }
+
+    // call to Backand action with the file name and file data  
+    factory.uploadFile = function(filename, filedata) {
+      // By calling the files action with POST method in will perform 
+      // an upload of the file into Backand Storage
+      return $http({
+        method: 'POST',
+        url : Backand.getApiUrl() + '/1/objects/action/items',
+        params:{
+          name: 'files'
+        },
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        // you need to provide the file name and the file data
+        data: {
+          filename: filename,
+          filedata: filedata.substr(filedata.indexOf(',') + 1, filedata.length) //need to remove the file prefix type
         }
       });
     };
@@ -35,6 +90,7 @@
 
   }
 
-  angular.module('common.services.backand',[])
+  angular.module('common.services.backand', [])
     .factory('BackandService', ['$http','Backand', backandService]);
+
 })();

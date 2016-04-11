@@ -2,9 +2,13 @@
   "name": "angular-kickstart",
   "dependencies": {
     "normalize-css": "~3.0.3",
-    "angular": "~1.4.5",
+    "angular": "~1.5.3",
     "angular-ui-router": "~0.2.14",
-    "pure": "~0.5.0"
+    "pure": "~0.5.0",
+    "ngCart": "ngcart#~1.0.0",
+    "ng-file-upload": "~11.2.3",
+    "angular-spinner": "0.5.1",
+    "angular-stripe": "~4.2.12"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.5"

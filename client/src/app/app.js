@@ -6,11 +6,12 @@
   });
 
   function config(BackandProvider, $stateProvider, $urlRouterProvider, $logProvider, $httpProvider) {
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/cart');
     $logProvider.debugEnabled(true);
 
-    //BackandProvider.setAnonymousToken('Your Anonymous Token');
-    //BackandProvider.setSignUpToken('Your SignUp Token');
+    BackandProvider.setAppName('ngcartexample');
+    BackandProvider.setSignUpToken('2e74c95f-eefa-4193-9607-e7d20d9b23e7');
+    BackandProvider.setAnonymousToken('ec9e6b1e-296b-4ac2-ae85-014c5a3482cc');
 
     $httpProvider.interceptors.push('httpInterceptor');
     $stateProvider
@@ -18,11 +19,11 @@
         views: {
           'header': {
             templateUrl: 'src/common/header.tpl.html',
-            controller: 'HeaderCtrl'
+            controller: 'HeaderCtrl as vm'
           },
           'footer': {
             templateUrl: 'src/common/footer.tpl.html',
-            controller: 'FooterCtrl'
+            controller: 'FooterCtrl as vm'
           }
         }
       });
@@ -38,19 +39,31 @@
 
   angular.module('app', [
       'ui.router',
+      'ngCart',
+      'ngFileUpload',
+      'angularSpinner',
+      'angular-stripe',
       'backand',
       'home',
       'getting-started',
       'common.header',
       'common.footer',
       'common.services.backand',
-      'common.services.data',
+      'common.services.auth',
       'common.directives.version',
       'common.filters.uppercase',
       'common.interceptors.http',
-      'templates'
+      'templates',
+      'cart',
+      'login',
+      'item',
+      'stripe'
     ])
     .config(config)
+    .config(function (stripeProvider) {
+      //Enter your Stripe publish key or use Backand test account
+      stripeProvider.setPublishableKey('pk_test_pRcGwomWSz2kP8GI0SxLH6ay');
+    })
     .run(run)
     .controller('MainCtrl', MainCtrl)
     .value('version', '1.1.0');

@@ -1,0 +1,61 @@
+<div class="view container">
+  <header>
+    <h3><span class="glyphicon glyphicon glyphicon-usd"></span> Make Payment using Stripe</h3>
+  </header>
+  <br/>
+  <span class="h4">Total Payment Due: ${{vm.amount}}</span>
+  <br/>
+  <form ng-submit="vm.makePayment()" method="POST" id="payment-form">
+    <span class="text-danger" ng-bind="vm.error"></span>
+    <fieldset>
+      <div class="form-group">
+        <span class="input-error" ng-bind="home.error"></span>
+        <br/>
+        <div class="row">
+          <div class="col-md-5">
+            <span>Name: (as it appears on the credit card)</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <input class="form-control input-primary" data-stripe="name" placeholder="Cardholder name"
+                   value=""/>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-2">
+            <span>Credit card number</span>
+          </div>
+          <div class="col-md-1">
+            <span>CVV</span>
+          </div>
+          <div class="col-md-1">
+            <span>Month</span>
+          </div>
+          <div class="col-md-1">
+            <span>Year</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            <input class="form-control input-primary" data-stripe="number" placeholder="credit card" value="4242424242424242"/>
+          </div>
+          <div class="col-md-1">
+            <input class="form-control input-primary" data-stripe="cvc" placeholder="cvc" value="111"/>
+          </div>
+          <div class="col-md-1">
+            <input class="form-control input-primary" data-stripe="exp-month" placeholder="month" value="01"/>
+          </div>
+          <div class="col-md-1">
+            <input class="form-control input-primary" data-stripe="exp-year" placeholder="year" value="2019"/>
+          </div>
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-primary">Submit Payment</button>
+        <br/>
+        <span class="text-success" ng-bind="vm.success"></span>
+      </div>
+    </fieldset>
+  </form>
+</div>

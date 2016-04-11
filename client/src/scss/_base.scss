@@ -88,3 +88,28 @@ pre {
 h4 {
   @include font-size(21);
 }
+
+.drop-box {
+  width: 100%;
+  height: 100px;
+  padding-top: 40px;
+  background: #F8F8F8;
+  border: 2px dashed #DDD;
+  text-align: center;
+  padding-top: 35px;
+  border-radius: 4px; }
+
+.dragover {
+  border: 2px dashed #0000ff; }
+
+.thumbnail {
+  min-height: 600px;
+  position: relative;
+  padding-bottom: 100px;
+}
+
+.bottom-box {
+  position: absolute;
+  bottom: 0;
+  height: 120px;
+}
