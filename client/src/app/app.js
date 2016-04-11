@@ -57,12 +57,17 @@
       'cart',
       'login',
       'item',
+      'items',
       'stripe'
     ])
     .config(config)
-    .config(function (stripeProvider) {
+    .constant("myConfig", {
+      "stripePublishableKey": "pk_test_pRcGwomWSz2kP8GI0SxLH6ay",
+      "payPalBusinessEmail": "paypal@backand.com"
+    })
+    .config(function (stripeProvider, myConfig) {
       //Enter your Stripe publish key or use Backand test account
-      stripeProvider.setPublishableKey('pk_test_pRcGwomWSz2kP8GI0SxLH6ay');
+      stripeProvider.setPublishableKey(myConfig.stripePublishableKey);
     })
     .run(run)
     .controller('MainCtrl', MainCtrl)

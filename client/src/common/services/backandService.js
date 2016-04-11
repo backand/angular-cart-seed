@@ -29,6 +29,19 @@
       });
     };
 
+    factory.getItems =  function(pageIndex, pageSize, filter, sort) {
+      return $http ({
+        method: 'GET',
+        url: Backand.getApiUrl() + '/1/objects/items',
+        params: {
+          pageSize: pageSize,
+          pageNumber: pageIndex+1,
+          filter: filter || null,
+          sort: sort || null
+        }
+      });
+    };
+
     factory.createCart = function(cart, token) {
       return $http({
         method: 'POST',

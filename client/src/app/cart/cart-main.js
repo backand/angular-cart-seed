@@ -22,7 +22,7 @@
    * @name  gettingStartedCtrl
    * @description Controller
    */
-  function cartCtrl(BackandService, ngCart, AuthService, $state) {
+  function cartCtrl(BackandService, ngCart, AuthService, $state, myConfig) {
 
     var vm = this;
 
@@ -30,6 +30,13 @@
       ngCart.setTaxRate(7.5);
       ngCart.setShipping(2.99);
       loadItems();
+      vm.payPalSettings = {
+        business: myConfig.payPalBusinessEmail,
+        item_name: "My products name",
+        item_number: 1,
+        currency_code: "USD",
+        no_note: "Any description"
+      }
     }());
 
     function loadItems(){
@@ -57,5 +64,5 @@
 
   angular.module('cart', [])
     .config(config)
-    .controller('cartCtrl', ['BackandService','ngCart','AuthService','$state', cartCtrl]);
+    .controller('cartCtrl', ['BackandService','ngCart','AuthService','$state','myConfig', cartCtrl]);
 })();
