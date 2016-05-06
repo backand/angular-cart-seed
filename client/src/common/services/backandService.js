@@ -32,11 +32,10 @@
     factory.getItems =  function(pageIndex, pageSize, filter, sort) {
       return $http ({
         method: 'GET',
-        url: Backand.getApiUrl() + '/1/objects/items',
+        url: Backand.getApiUrl() + '/1/objects/items?filter=' + JSON.stringify({q: { name: { $like: "dea"}}}),
         params: {
           pageSize: pageSize,
           pageNumber: pageIndex+1,
-          filter: filter || null,
           sort: sort || null
         }
       });

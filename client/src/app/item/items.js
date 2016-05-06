@@ -22,13 +22,13 @@
    * @name  gettingStartedCtrl
    * @description Controller
    */
-  function itemsCtrl(BackandService, AuthService, $state, usSpinnerService) {
+  function itemsCtrl(BackandService, AuthService, $state, $timeout, usSpinnerService) {
 
     var vm = this;
     vm.items = [];
     vm.filteredCount = 0;
     vm.orderby = "name";
-    vm.reverse = 'asc';
+    vm.reverse = false;
     vm.searchText = null;
     vm.cardAnimationClass = '.card-animation';
 
@@ -36,6 +36,12 @@
     vm.totalRecords = 0;
     vm.pageSize = 10;
     vm.currentPage = 1;
+
+    vm.DisplayModeEnum = {
+      Card: 0,
+      List: 1
+    };
+    vm.listDisplayModeEnabled = vm.DisplayModeEnum.Card;
 
     (function init() {
       loadItems('');
@@ -45,17 +51,6 @@
       vm.currentPage = page;
       loadItems(vm.searchText);
     };
-    
-    vm.changeDisplayMode = function (displayMode) {
-      switch (displayMode) {
-        case vm.DisplayModeEnum.Card:
-          vm.listDisplayModeEnabled = false;
-          break;
-        case vm.DisplayModeEnum.List:
-          vm.listDisplayModeEnabled = true;
-          break;
-      }
-    };
 
     vm.navigate = function (url) {
       $location.path(url);
@@ -63,16 +58,22 @@
 
     vm.setOrder = function (orderby) {
       if (orderby === vm.orderby) {
-        vm.reverse = (reverse === 'asc') ? 'desc' : 'asc';
+        vm.reverse = !vm.reverse;
       }
       vm.orderby = orderby;
+
+      loadItems('');
+    };
+
+    vm.searchTextChanged = function () {
+      loadItems(vm.searchText);
     };
     
     function loadItems(filterText) {
       BackandService.getItems(vm.currentPage - 1,
           vm.pageSize,
           filterItems(filterText),
-          [{fieldName: vm.orderby, order: vm.reverse}])
+          [{fieldName: vm.orderby, order: (vm.reverse) ? 'desc' : 'asc'}])
         .then(function (results) {
           vm.totalRecords = results.data.totalRows;
           vm.items = results.data.data;
@@ -81,7 +82,7 @@
           }, 1000);
 
         }, function (error) {
-          $window.alert('Sorry, an error occurred: ' + error.data.message);
+          alert('Sorry, an error occurred: ' + error.data);
         });
     }
 
@@ -89,12 +90,12 @@
       if(filterText === '' || filterText === null)
           return null;
       else
-        return {"q":{"name": filterText}};
+        return {"q": { "name" : {"$like" : filterText } } };
     }
     
   }
 
   angular.module('items', [])
     .config(config)
-    .controller('itemsCtrl', ['BackandService', 'AuthService','$state','usSpinnerService', itemsCtrl]);
+    .controller('itemsCtrl', ['BackandService', 'AuthService','$state','$timeout','usSpinnerService', itemsCtrl]);
 })();
